@@ -1,6 +1,6 @@
 {
-  "name": "easyvar",
-  "version": "0.1.0",
+  "name": "shadcn-ui-theme-designer",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
