@@ -2,26 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 96%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 89%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 89%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 180 66% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 210 66% 50%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 86%;
+    --muted-foreground: 0 0% 0%;
+    --accent: 150 66% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 0%;
+    --border: 0 0% 67%;
+    --input: 0 0% 59%;
+    --ring: 180 66% 33%;
+    --chart-1: 180 66% 50%;
+    --chart-2: 330 66% 50%;
+    --chart-3: 30 66% 50%;
+    --chart-4: 150 66% 50%;
+    --chart-5: 210 66% 50%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 0 0% 2%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 180 66% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 66% 50%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 100%;
+    --accent: 150 66% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 28%;
+    --input: 0 0% 30%;
+    --ring: 180 66% 33%;
+    --chart-1: 180 66% 50%;
+    --chart-2: 330 66% 50%;
+    --chart-3: 30 66% 50%;
+    --chart-4: 150 66% 50%;
+    --chart-5: 210 66% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }

@@ -1,0 +1,10 @@
+{
+  "ignore": {
+    "files": [
+      "/Users/tariel/localdoc/mygit/easyvar/.next/types/app/layout.ts",
+      "/Users/tariel/localdoc/mygit/easyvar/.next/types/app/page.ts",
+      "/Users/tariel/localdoc/mygit/easyvar/app/layout.tsx",
+      "/Users/tariel/localdoc/mygit/easyvar/app/page.tsx"
+    ]
+  }
+}
