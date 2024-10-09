@@ -5,11 +5,16 @@ import Showcase from '@/components/examples'
 import WelcomeCard from '@/components/welcome-card'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from './ui/button'
 
 export const ThemeDesigner = () => {
   const [isInterfaceVisible, setIsInterfaceVisible] = useState(true)
+  const [hasLoaded, setHasLoaded] = useState(false)
+
+  useEffect(() => {
+    setHasLoaded(true)
+  }, [])
 
   return (
     <div className='relative h-full text-xs pt-4 pr-8 overflow-x-hidden'>
@@ -31,8 +36,8 @@ export const ThemeDesigner = () => {
             <motion.div
               layout
               key='left-panel'
-              initial={{ x: '-100%', opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
+              initial={hasLoaded ? { x: '-100%', opacity: 0 } : false}
+              animate={hasLoaded ? { x: 0, opacity: 1 } : {}}
               exit={{ x: '-100%', opacity: 0 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
               className='w-full lg:w-[30%] pr-4 overflow-hidden '>

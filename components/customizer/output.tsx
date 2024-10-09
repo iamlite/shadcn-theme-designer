@@ -11,13 +11,13 @@ export function CssOutputDialog() {
 
   const generateCssOutput = () => {
     const lightVars = colorVariables
-      .map((v) => {
+      .map((v, index) => {
         const color = lightColors[v] || themePresets[0].lightColors[v]
         return `    --${v}: ${color};`
       })
       .join('\n')
     const darkVars = colorVariables
-      .map((v) => {
+      .map((v, index) => {
         const color = darkColors[v] || themePresets[0].darkColors[v]
         return `    --${v}: ${color};`
       })
