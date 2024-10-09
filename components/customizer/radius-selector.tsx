@@ -12,7 +12,7 @@ export default function RadiusSelector() {
   const [, setCurrentRadius] = useState(radius.toString())
 
   return (
-    <div className='mt-4 border-t pt-4'>
+    <div className='mt-4 border-t pt-3'>
       <Label className='text-xs mb-2 block'>Border Radius</Label>
       <ButtonGroup
         value={radius.toString()}
@@ -28,7 +28,7 @@ export default function RadiusSelector() {
             <ButtonGroupItem
               icon={
                 <div
-                  className='w-4 h-4 border-t-2 border-l-2 border-primary'
+                  className='w-6 h-6 border-t-2 border-l-2 border-foreground'
                   style={{
                     borderTopLeftRadius: `${option}rem`
                   }}

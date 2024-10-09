@@ -84,13 +84,13 @@ export default function CardsPage() {
       <AnimatePresence>
         {shouldAnimate && (
           <motion.div
-            className='items-start justify-center gap-6 rounded-lg p-8 md:grid lg:grid-cols-2 xl:grid-cols-3'
+            className='items-start justify-center gap-6 rounded-lg md:grid lg:grid-cols-2 xl:grid-cols-3'
             variants={containerVariants}
             initial='hidden'
             animate='visible'>
             <div className='col-span-2 grid items-start gap-6 lg:col-span-1'>
               <DemoContainer>
-                <DemoCreateAccount />
+                <DemoReportAnIssue />
               </DemoContainer>
               <DemoContainer>
                 <DemoDatePicker />
@@ -113,7 +113,7 @@ export default function CardsPage() {
             </div>
             <div className='col-span-2 grid items-start gap-6 lg:col-span-2 lg:grid-cols-2 xl:col-span-1 xl:grid-cols-1'>
               <DemoContainer>
-                <DemoReportAnIssue />
+                <DemoCreateAccount />
               </DemoContainer>
               <DemoContainer>
                 <UserProfileCard />

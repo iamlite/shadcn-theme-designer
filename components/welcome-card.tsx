@@ -1,16 +1,22 @@
 'use client'
 
 import { PresetButtons } from '@/components/customizer/preset-buttons'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useColorContext } from '@/contexts/color-context'
+import { ChevronLeft } from 'lucide-react'
 
-export default function WelcomeCard() {
+interface WelcomeCardProps {
+  onHideDesigner: () => void
+}
+
+export default function WelcomeCard({ onHideDesigner }: WelcomeCardProps) {
   const { isLoaded } = useColorContext()
 
   if (!isLoaded) {
     return (
-      <Card className='mb-4'>
+      <Card className='mb-4 pl-6 rounded-l-none border-l-0'>
         <CardHeader>
           <Skeleton className='h-8 w-3/4' />
         </CardHeader>
@@ -28,9 +34,16 @@ export default function WelcomeCard() {
   }
 
   return (
-    <Card className='mb-4'>
-      <CardHeader>
+    <Card className='mb-4 pl-6 rounded-l-none border-l-0'>
+      <CardHeader className='flex flex-row items-center justify-between'>
         <CardTitle>Welcome! 👋</CardTitle>
+        <Button
+          variant='outline'
+          onClick={onHideDesigner}
+          className='text-xs'>
+          <ChevronLeft className='mr-2 h-4 w-4' />
+          Hide Theme Designer
+        </Button>
       </CardHeader>
       <CardContent>
         <p className='text-sm text-muted-foreground'>

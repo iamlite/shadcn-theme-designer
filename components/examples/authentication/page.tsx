@@ -12,7 +12,7 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.2,
       delayChildren: 0.3
     }
   }
@@ -34,7 +34,7 @@ const itemVariants = {
 export default function AuthenticationPage() {
   return (
     <React.Fragment>
-      <div className='relative flex flex-col h-full items-center justify-center p-4 md:grid lg:max-w-none lg:grid-cols-2'>
+      <div className='relative flex flex-col h-[800px] items-center rounded-xl border border-border justify-center p-4 md:grid lg:max-w-none lg:grid-cols-2'>
         <Link
           href='#'
           className={cn(buttonVariants({ variant: 'ghost' }), 'absolute right-4 top-4 md:right-8 md:top-8')}>
@@ -43,12 +43,19 @@ export default function AuthenticationPage() {
         <div className='relative rounded-xl hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex'>
           <motion.div
             variants={itemVariants}
+            initial='hidden'
+            animate='visible'
             className='absolute inset-0 bg-accent rounded-xl'
           />
           <motion.div
             variants={itemVariants}
+            initial='hidden'
+            animate='visible'
             className='relative z-20 flex items-center text-lg font-medium'>
-            <svg
+            <motion.svg
+              variants={itemVariants}
+              initial='hidden'
+              animate='visible'
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 24 24'
               fill='none'
@@ -58,7 +65,7 @@ export default function AuthenticationPage() {
               strokeLinejoin='round'
               className='mr-2 h-6 w-6'>
               <path d='M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3' />
-            </svg>
+            </motion.svg>
             Acme Inc
           </motion.div>
           <motion.div

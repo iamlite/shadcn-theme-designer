@@ -40,7 +40,7 @@ const itemVariants = {
 export default function MusicPage() {
   return (
     <motion.div
-      className='flex flex-col h-full overflow-hidden'
+      className='flex flex-col max-h-[1000px] overflow-hidden rounded-xl border border-border '
       variants={containerVariants}
       initial='hidden'
       animate='visible'>

@@ -1,17 +1,9 @@
-import ColorPicker from '@/components/customizer/color-menu'
-import Showcase from '@/components/examples'
-import WelcomeCard from '@/components/welcome-card'
+import { ThemeDesigner } from '@/components/theme-designer'
 
 export default function Home() {
   return (
-    <div className='flex flex-col md:flex-row h-full text-xs p-8'>
-      <div className='w-full lg:w-[30%] pr-4'>
-        <WelcomeCard />
-        <ColorPicker />
-      </div>
-      <div className='w-full lg:w-[70%]'>
-        <Showcase />
-      </div>
+    <div className='h-full overflow-y-auto bg-gradient-to-br from-foreground/5 via-transparent to-foreground/5 transition-colors duration-1000'>
+      <ThemeDesigner />
     </div>
   )
 }

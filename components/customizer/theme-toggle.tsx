@@ -3,17 +3,15 @@ import { Moon, Sun } from 'lucide-react'
 import { Button } from '../ui/button'
 
 export const ThemeToggle = () => {
-  const { toggleTheme } = useThemeToggle()
+  const { toggleTheme, theme } = useThemeToggle()
 
   return (
     <Button
       onClick={toggleTheme}
       variant='outline'
-      size='sm'
+      size='icon'
       className='flex items-center space-x-1'>
-      <Sun className='h-3 w-3 dark:hidden' />
-      <Moon className='h-3 w-3 hidden dark:block' />
-      <span>Theme</span>
+      {theme === 'dark' ? <Sun className='h-4 w-4' /> : <Moon className='h-4 w-4' />}
     </Button>
   )
 }

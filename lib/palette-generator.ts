@@ -7,28 +7,32 @@ const generatePrimaryColor = (): Color => {
   let primary: Color
   do {
     const h = Math.floor(Math.random() * 360)
-    const s = clamp(60 + Math.floor(Math.random() * 30), 0, 100)
-    const l = clamp(25 + Math.floor(Math.random() * 50), 25, 75)
+    const s = clamp(40 + Math.floor(Math.random() * 60), 0, 100)
+    const l = clamp(30 + Math.floor(Math.random() * 50), 30, 80)
     primary = new Color(`hsl(${h}, ${s}%, ${l}%)`)
   } while (!primary.isLight(0.3) && !primary.isLight(0.7))
   return primary
 }
 
-const generateColorShades = (color: Color): [Color, Color] => {
-  const lightShade = color.adjustLightness(clamp(Math.floor(Math.random() * 15), 5, 15))
-  const darkShade = color.adjustLightness(clamp(Math.floor(Math.random() * -15), -15, -5))
-  return [lightShade, darkShade]
-}
-
 const generateForegroundColor = (background: Color): Color => {
   const isLightBackground = background.isLight()
-  let foreground = isLightBackground ? new Color('hsl(0, 0%, 0%)') : new Color('hsl(0, 0%, 100%)')
+  let foreground = isLightBackground ? new Color('hsl(0, 0%, 5%)') : new Color('hsl(0, 0%, 95%)')
 
-  const { contrastRatio } = background.getWCAGCompliance(foreground, 'Normal')
+  const targetContrast = 7
+  const minimumContrast = 4.5
 
-  if (contrastRatio < 4.5) {
-    const adjustment = isLightBackground ? -10 : 10
+  let { contrastRatio } = background.getWCAGCompliance(foreground, 'Normal')
+  let attempts = 0
+
+  while (contrastRatio < targetContrast && attempts < 20) {
+    const adjustment = isLightBackground ? -5 - Math.floor(Math.random() * 5) : 5 + Math.floor(Math.random() * 5)
     foreground = foreground.adjustLightness(adjustment)
+    contrastRatio = background.getWCAGCompliance(foreground, 'Normal').contrastRatio
+    attempts++
+  }
+
+  if (contrastRatio < minimumContrast) {
+    foreground = isLightBackground ? new Color('hsl(0, 0%, 0%)') : new Color('hsl(0, 0%, 100%)')
   }
 
   return foreground
@@ -45,17 +49,14 @@ const generateAccentColor = (primary: Color): Color => {
 }
 
 const generateRingColor = (primary: Color): Color => {
-  return primary.adjustLightness(Math.floor(Math.random() * 21) - 20)
+  return primary.adjustLightness(Math.floor(Math.random() * 21) - 20).adjustHue(Math.floor(Math.random() * 31) - 15)
 }
 
-const generateBackgroundForeground = (isLight: boolean): [Color, Color] => {
+const generateBackground = (isLight: boolean): [Color] => {
   const bgLightness = isLight
     ? clamp(95 + Math.floor(Math.random() * 10) - 5, 90, 100)
     : clamp(5 + Math.floor(Math.random() * 10) - 5, 0, 10)
-  const fgLightness = isLight
-    ? clamp(Math.floor(Math.random() * 4), 0, 3)
-    : clamp(97 + Math.floor(Math.random() * 4), 97, 100)
-  return [new Color(`hsl(0, 0%, ${bgLightness}%)`), new Color(`hsl(0, 0%, ${fgLightness}%)`)]
+  return [new Color(`hsl(0, 0%, ${bgLightness}%)`)]
 }
 
 const generateCardColor = (background: Color, isLight: boolean): Color => {
@@ -64,13 +65,19 @@ const generateCardColor = (background: Color, isLight: boolean): Color => {
 }
 
 const generateMutedColor = (background: Color, isLight: boolean): Color => {
-  const adjustment = isLight ? -10 : 10
-  return background.adjustLightness(adjustment)
+  const adjustment = isLight ? -Math.floor(Math.random() * 16) - 15 : Math.floor(Math.random() * 16) + 15
+  return background.adjustLightness(adjustment).adjustSaturation(-20)
+}
+
+const generateMutedForeground = (background: Color, isLight: boolean): Color => {
+  const baseForeground = generateForegroundColor(background)
+  const mutedAdjustment = isLight ? 25 : -25
+  return baseForeground.adjustLightness(mutedAdjustment).adjustSaturation(-30)
 }
 
 const generateDestructiveColor = (): Color => {
   const baseRed = new Color('hsl(0, 100%, 50%)')
-  return baseRed.adjustSaturation(Math.floor(Math.random() * 21) - 10)
+  return baseRed.adjustSaturation(Math.floor(Math.random() * 21) - 10).adjustHue(Math.floor(Math.random() * 31) - 15)
 }
 
 const generateBorderColor = (background: Color): Color => {
@@ -89,12 +96,14 @@ const generateChartColors = (primary: Color): Color[] => {
   return [base, doubleSplit1, doubleSplit2, doubleSplit3, doubleSplit4]
 }
 
-const boostSaturation = (color: Color, amount: number): Color => {
-  return color.adjustSaturation(amount)
-}
-
 const tintColor = (color: Color, tintColor: Color, amount: number): Color => {
   return color.mix(tintColor, amount)
+}
+
+const generateColorShades = (color: Color): [Color, Color] => {
+  const lightShade = color.adjustLightness(clamp(Math.floor(Math.random() * 15), 5, 15))
+  const darkShade = color.adjustLightness(clamp(Math.floor(Math.random() * -15), -15, -5))
+  return [lightShade, darkShade]
 }
 
 export function generateColorPalette(
@@ -122,9 +131,9 @@ export function generateColorPalette(
   const darkAccentForeground = generateForegroundColor(darkAccent)
   const lightDestructiveForeground = generateForegroundColor(lightDestructive)
   const darkDestructiveForeground = generateForegroundColor(darkDestructive)
-  const [lightFg, darkFg] = generateBackgroundForeground(false)
-  let lightBg = generateBackgroundForeground(true)[0]
-  let darkBg = generateBackgroundForeground(false)[0]
+
+  let lightBg = generateBackground(true)[0]
+  let darkBg = generateBackground(false)[0]
   let lightCard = generateCardColor(lightBg, true)
   let darkCard = generateCardColor(darkBg, false)
   let lightMuted = generateMutedColor(lightBg, true)
@@ -136,6 +145,10 @@ export function generateColorPalette(
   const chartColors = generateChartColors(primary)
   const randomRadiusOptions = radiusOptions.slice(1, -1)
   const randomRadius = randomRadiusOptions[Math.floor(Math.random() * randomRadiusOptions.length)]
+  const lightFg = generateForegroundColor(lightBg)
+  const darkFg = generateForegroundColor(darkBg)
+  const lightMutedForeground = generateMutedForeground(lightBg, true)
+  const darkMutedForeground = generateMutedForeground(darkBg, false)
 
   if (boostSaturation) {
     lightBg = tintColor(lightBg, primary, 0.1)
@@ -161,7 +174,7 @@ export function generateColorPalette(
       secondary: lightSecondary,
       'secondary-foreground': lightSecondaryForeground,
       muted: lightMuted,
-      'muted-foreground': lightFg.adjustLightness(-30),
+      'muted-foreground': lightMutedForeground,
       accent: lightAccent,
       'accent-foreground': lightAccentForeground,
       destructive: lightDestructive,
@@ -183,7 +196,7 @@ export function generateColorPalette(
       secondary: darkSecondary,
       'secondary-foreground': darkSecondaryForeground,
       muted: darkMuted,
-      'muted-foreground': darkFg.adjustLightness(30),
+      'muted-foreground': darkMutedForeground,
       accent: darkAccent,
       'accent-foreground': darkAccentForeground,
       destructive: darkDestructive,

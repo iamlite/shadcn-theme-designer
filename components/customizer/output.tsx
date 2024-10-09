@@ -1,10 +1,10 @@
 import { useColorContext } from '@/contexts/color-context'
 import { themePresets } from '@/lib/presets'
 import { colorVariables } from '@/lib/vars'
+import { Download } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '../ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
-
 export function CssOutputDialog() {
   const [copied, setCopied] = useState(false)
   const { lightColors, darkColors, radius } = useColorContext()
@@ -47,7 +47,12 @@ ${darkVars}
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant='outline'>Show CSS Output</Button>
+        <Button
+          size='sm'
+          variant='outline'>
+          <Download className='mr-1 h-3 w-3' />
+          Export CSS
+        </Button>
       </DialogTrigger>
       <DialogContent className='max-w-4xl'>
         <DialogHeader>

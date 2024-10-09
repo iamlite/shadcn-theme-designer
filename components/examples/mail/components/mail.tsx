@@ -7,7 +7,6 @@ import { Nav } from '@/components/examples/mail/components/nav'
 import { type Mail } from '@/components/examples/mail/data'
 import { useMail } from '@/components/examples/mail/use-mail'
 import { Input } from '@/components/ui/input'
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
 import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { TooltipProvider } from '@/components/ui/tooltip'
@@ -35,8 +34,8 @@ interface MailProps {
     icon: React.ReactNode
   }[]
   mails: Mail[]
-  defaultLayout: number[] | undefined
-  defaultCollapsed?: boolean
+  defaultLayout?: string
+  defaultCollapsed?: string
   navCollapsedSize: number
 }
 
@@ -62,39 +61,14 @@ const itemVariants = {
   }
 }
 
-export function Mail({
-  accounts,
-  mails,
-  defaultLayout = [20, 32, 48],
-  defaultCollapsed = false,
-  navCollapsedSize
-}: MailProps) {
-  const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed)
+export function Mail({ accounts, mails }: MailProps) {
   const [mail] = useMail()
+  const [isCollapsed, setIsCollapsed] = React.useState(false)
 
   return (
     <TooltipProvider delayDuration={0}>
-      <ResizablePanelGroup
-        direction='horizontal'
-        onLayout={(sizes: number[]) => {
-          document.cookie = `react-resizable-panels:layout:mail=${JSON.stringify(sizes)}`
-        }}
-        className='h-full max-h-[800px] items-stretch'>
-        <ResizablePanel
-          defaultSize={defaultLayout[0]}
-          collapsedSize={navCollapsedSize}
-          collapsible={true}
-          minSize={15}
-          maxSize={20}
-          onCollapse={() => {
-            setIsCollapsed(true)
-            document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(true)}`
-          }}
-          onResize={() => {
-            setIsCollapsed(false)
-            document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(false)}`
-          }}
-          className={cn(isCollapsed && 'min-w-[50px] transition-all duration-300 ease-in-out')}>
+      <div className='flex max-h-[800px] rounded-xl border border-border overflow-hidden'>
+        <div className={cn('w-[20%]', isCollapsed && 'w-[50px] transition-all duration-300 ease-in-out')}>
           <motion.div
             variants={containerVariants}
             initial='hidden'
@@ -190,11 +164,8 @@ export function Mail({
               />
             </motion.div>
           </motion.div>
-        </ResizablePanel>
-        <ResizableHandle withHandle />
-        <ResizablePanel
-          defaultSize={defaultLayout[1]}
-          minSize={30}>
+        </div>
+        <div className='w-[32%]'>
           <motion.div
             variants={containerVariants}
             initial='hidden'
@@ -245,11 +216,8 @@ export function Mail({
               </motion.div>
             </Tabs>
           </motion.div>
-        </ResizablePanel>
-        <ResizableHandle withHandle />
-        <ResizablePanel
-          defaultSize={defaultLayout[2]}
-          minSize={30}>
+        </div>
+        <div className='w-[48%]'>
           <motion.div
             variants={containerVariants}
             initial='hidden'
@@ -258,8 +226,8 @@ export function Mail({
               <MailDisplay mail={mails.find((item) => item.id === mail.selected) || null} />
             </motion.div>
           </motion.div>
-        </ResizablePanel>
-      </ResizablePanelGroup>
+        </div>
+      </div>
     </TooltipProvider>
   )
 }

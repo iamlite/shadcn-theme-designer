@@ -45,7 +45,7 @@ const itemVariants = {
 export default function PlaygroundPage() {
   return (
     <motion.div
-      className='flex flex-col h-full overflow-hidden'
+      className='flex flex-col overflow-hidden rounded-lg border border-border shadow-sm'
       variants={containerVariants}
       initial='hidden'
       animate='visible'>
@@ -68,7 +68,7 @@ export default function PlaygroundPage() {
         </motion.div>
         <Separator />
         <Tabs
-          defaultValue='complete'
+          defaultValue='edit'
           className='flex-1'>
           <motion.div
             className='container h-full py-6'

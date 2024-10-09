@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 
 export default function ColorMenuSkeleton() {
   return (
-    <Card className='p-4'>
+    <Card className='pr-4 pl-8 pb-4 rounded-l-none border-l-0'>
       <Table>
         <TableHeader>
           <TableRow>
@@ -29,14 +29,14 @@ export default function ColorMenuSkeleton() {
                 <div className='flex items-center space-x-1'>
                   <Skeleton className='h-4 w-4 rounded-md' />
                   <Skeleton className='h-4 w-4 rounded-md' />
-                  <Skeleton className='h-6 w-12 rounded-md' />
+                  <Skeleton className='h-5 w-12 rounded-md' />
                 </div>
               </TableCell>
               <TableCell className='py-0.5'>
                 <div className='flex items-center space-x-1'>
                   <Skeleton className='h-4 w-4 rounded-md' />
                   <Skeleton className='h-4 w-4 rounded-md' />
-                  <Skeleton className='h-6 w-12 rounded-md' />
+                  <Skeleton className='h-5 w-12 rounded-md' />
                 </div>
               </TableCell>
             </TableRow>

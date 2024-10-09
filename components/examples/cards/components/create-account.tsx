@@ -10,16 +10,20 @@ export function DemoCreateAccount() {
   return (
     <Card>
       <CardHeader className='space-y-1'>
-        <CardTitle className='text-2xl'>Create an account</CardTitle>
-        <CardDescription>Enter your email below to create your account</CardDescription>
+        <CardTitle className='text-lg'>Create an account</CardTitle>
+        <CardDescription className='text-md'>Enter your email below to create your account</CardDescription>
       </CardHeader>
       <CardContent className='grid gap-4'>
         <div className='grid grid-cols-2 gap-6'>
-          <Button variant='outline'>
+          <Button
+            variant='outline'
+            size='sm'>
             <Icons.gitHub className='mr-2 h-4 w-4' />
             Github
           </Button>
-          <Button variant='outline'>
+          <Button
+            variant='outline'
+            size='sm'>
             <Icons.google className='mr-2 h-4 w-4' />
             Google
           </Button>
@@ -49,7 +53,11 @@ export function DemoCreateAccount() {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className='w-full'>Create account</Button>
+        <Button
+          size='sm'
+          className='w-full'>
+          Create account
+        </Button>
       </CardFooter>
     </Card>
   )

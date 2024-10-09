@@ -1,5 +1,4 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { cookies } from 'next/headers'
 import AuthenticationPage from './authentication/page'
 import CardsPage from './cards/page'
 import DashboardPage from './dashboard/page'
@@ -8,17 +7,12 @@ import MusicPage from './music/page'
 import PlaygroundPage from './playground/page'
 
 export default function Showcase() {
-  const layout = cookies().get('react-resizable-panels:layout:mail')
-  const collapsed = cookies().get('react-resizable-panels:collapsed')
-
-  const defaultLayout = layout ? JSON.parse(layout.value) : undefined
-  const defaultCollapsed = collapsed ? JSON.parse(collapsed.value) : undefined
   return (
     <div className='relative flex flex-col h-full'>
       <Tabs
         defaultValue='cards'
-        className='flex flex-col h-full'>
-        <TabsList className='w-full'>
+        className='flex flex-col'>
+        <TabsList className='max-w-6xl mx-auto w-full'>
           <TabsTrigger
             className='w-full'
             value='cards'>
@@ -51,7 +45,7 @@ export default function Showcase() {
           </TabsTrigger>
         </TabsList>
 
-        <div className='flex-grow flex flex-col rounded-xl border border-border mt-4 overflow-y-auto'>
+        <div className='flex-grow flex flex-col overflow-y-auto px-8 py-4 w-full'>
           <TabsContent
             value='cards'
             className='flex-grow'>
@@ -68,10 +62,7 @@ export default function Showcase() {
             <DashboardPage />
           </TabsContent>
           <TabsContent value='mail'>
-            <MailPage
-              defaultLayout={defaultLayout}
-              defaultCollapsed={defaultCollapsed}
-            />
+            <MailPage />
           </TabsContent>
           <TabsContent
             className='flex-grow'

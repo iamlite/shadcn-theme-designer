@@ -14,18 +14,17 @@ export default function UserProfileCard() {
   const [notifications, setNotifications] = useState(true)
 
   return (
-    <Card className='w-[300px] h-[300px]'>
-      <CardHeader className='flex flex-row items-center gap-4 pb-2'>
-        <Avatar className='h-14 w-14'>
-          <AvatarImage
-            src='/placeholder.svg?height=56&width=56'
-            alt='User avatar'
-          />
-          <AvatarFallback>JD</AvatarFallback>
-        </Avatar>
+    <Card className='w-[300px] h-full'>
+      <CardHeader className='flex flex-row items-center gap-4 pb-4'>
+        <div className='h-12 w-12 bg-gradient-to-br from-primary via-secondary to-primary rounded-full flex items-center justify-center'>
+          <Avatar className='h-10 w-10'>
+            <AvatarImage src='/avatars/03.png' />
+            <AvatarFallback>JD</AvatarFallback>
+          </Avatar>
+        </div>
         <div className='flex flex-col'>
-          <h2 className='text-lg font-semibold'>Jane Doe</h2>
-          <p className='text-sm text-muted-foreground'>Product Designer</p>
+          <h2 className='text-md font-semibold'>Jane Doe</h2>
+          <p className='text-xs text-muted-foreground'>Product Designer</p>
         </div>
       </CardHeader>
       <CardContent className='pb-2'>
@@ -34,7 +33,7 @@ export default function UserProfileCard() {
           <Badge variant='outline'>UI</Badge>
           <Badge variant='default'>Research</Badge>
         </div>
-        <p className='text-sm text-muted-foreground mb-4'>
+        <p className='text-xs text-muted-foreground mb-4'>
           Passionate about creating intuitive and beautiful user experiences.
         </p>
         <div className='flex items-center space-x-2 mb-2'>
@@ -45,7 +44,7 @@ export default function UserProfileCard() {
           />
           <Label
             htmlFor='notifications'
-            className='text-sm'>
+            className='text-xs'>
             Receive notifications
           </Label>
         </div>

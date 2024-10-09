@@ -9,8 +9,8 @@ export function DemoCookieSettings() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Cookie Settings</CardTitle>
-        <CardDescription>Manage your cookie settings here.</CardDescription>
+        <CardTitle className='text-lg'>Cookie Settings</CardTitle>
+        <CardDescription className='text-md'>Manage your cookie settings here.</CardDescription>
       </CardHeader>
       <CardContent className='grid gap-6'>
         <div className='flex items-center justify-between space-x-2'>
@@ -18,7 +18,7 @@ export function DemoCookieSettings() {
             htmlFor='necessary'
             className='flex flex-col space-y-1'>
             <span>Strictly Necessary</span>
-            <span className='font-normal leading-snug text-muted-foreground'>
+            <span className='font-normal leading-snug text-muted-foreground text-xs'>
               These cookies are essential in order to use the website and use its features.
             </span>
           </Label>
@@ -32,7 +32,7 @@ export function DemoCookieSettings() {
             htmlFor='functional'
             className='flex flex-col space-y-1'>
             <span>Functional Cookies</span>
-            <span className='font-normal leading-snug text-muted-foreground'>
+            <span className='font-normal leading-snug text-muted-foreground text-xs'>
               These cookies allow the website to provide personalized functionality.
             </span>
           </Label>
@@ -43,7 +43,7 @@ export function DemoCookieSettings() {
             htmlFor='performance'
             className='flex flex-col space-y-1'>
             <span>Performance Cookies</span>
-            <span className='font-normal leading-snug text-muted-foreground'>
+            <span className='font-normal leading-snug text-muted-foreground text-xs'>
               These cookies help to improve the performance of the website.
             </span>
           </Label>

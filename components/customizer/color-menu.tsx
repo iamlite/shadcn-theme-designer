@@ -15,7 +15,7 @@ import RadiusSelector from './radius-selector'
 import { ResetButton } from './reset-button'
 import { ThemeToggle } from './theme-toggle'
 
-export default function ColorMenu() {
+export default function ColorMenu({ isInterfaceVisible }: { isInterfaceVisible: boolean }) {
   const {
     lightColors,
     darkColors,
@@ -31,13 +31,13 @@ export default function ColorMenu() {
   }
 
   return (
-    <Card className='p-4'>
+    <Card className={`pr-4 pl-8 pb-4 rounded-l-none border-l-0 ${isInterfaceVisible ? '' : ''}`}>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className='py-2'>Variable</TableHead>
-            <TableHead className='py-2'>Light Mode</TableHead>
-            <TableHead className='py-2'>Dark Mode</TableHead>
+            <TableHead>Variable</TableHead>
+            <TableHead>Light Mode</TableHead>
+            <TableHead>Dark Mode</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -52,21 +52,21 @@ export default function ColorMenu() {
                     onClick={() => handleInvertColor(variable, 'light')}
                     size='icon'
                     variant='ghost'
-                    className='h-6 w-6'>
+                    className='h-5 w-5'>
                     <RotateCcw className='h-3 w-3' />
                   </Button>
                   <Button
                     onClick={() => handleFlipColor(variable, 'light')}
                     size='icon'
                     variant='ghost'
-                    className='h-6 w-6'>
+                    className='h-5 w-5'>
                     <ArrowLeftRight className='h-3 w-3' />
                   </Button>
                   <Input
                     type='color'
                     value={hslToHex(lightColors[variable])}
                     onChange={(e) => handleColorChange(variable, stringToHsl(e.target.value), 'light')}
-                    className='h-6 w-12 rounded-md p-0'
+                    className='h-5 w-12 rounded p-0 transition-none'
                     style={{ backgroundColor: `hsl(${lightColors[variable]})` }}
                   />
                 </div>
@@ -77,21 +77,21 @@ export default function ColorMenu() {
                     onClick={() => handleInvertColor(variable, 'dark')}
                     size='icon'
                     variant='ghost'
-                    className='h-6 w-6'>
+                    className='h-5 w-5'>
                     <RotateCcw className='h-3 w-3' />
                   </Button>
                   <Button
                     onClick={() => handleFlipColor(variable, 'dark')}
                     size='icon'
                     variant='ghost'
-                    className='h-6 w-6'>
+                    className='h-5 w-5'>
                     <ArrowLeftRight className='h-3 w-3' />
                   </Button>
                   <Input
                     type='color'
                     value={hslToHex(darkColors[variable])}
                     onChange={(e) => handleColorChange(variable, stringToHsl(e.target.value), 'dark')}
-                    className='h-6 w-12 rounded-md p-0'
+                    className='h-5 w-12 rounded p-0 transition-none'
                     style={{ backgroundColor: `hsl(${darkColors[variable]})` }}
                   />
                 </div>
