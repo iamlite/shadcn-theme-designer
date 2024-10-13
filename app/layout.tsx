@@ -1,30 +1,22 @@
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
+import { Inter } from 'next/font/google'
 import ProviderProvider from '../contexts/provider-provider'
 import './globals.css'
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900'
-})
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900'
-})
-
+const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
-  title: 'Shadcn Theme Designer',
+  title: 'Shadesigner - A Shadcn Palette Generator & Theme Designer',
   description:
-    'Create themes for your Shadcn projects. Generate beautiful color palettes. Edit your existing themes. 100% WCAG compliant theme generator.',
-  applicationName: 'Shadcn Theme Designer',
+    'Generate beautiful color palettes for your Shadcn projects. Edit your existing themes. 100% WCAG compliant theme generator.',
+  applicationName: 'Shadesigner - A Shadcn Palette Generator & Theme Designer',
   authors: [
     {
       name: 'Tariel Davidashvili',
-      url: 'https://tariel.me'
+      url: 'https://tarieldavids.com'
     }
   ],
+  creator: 'Tariel Davidashvili',
+  publisher: 'Tariel Davidashvili',
   generator: 'Next.js',
   keywords: [
     'shadcn',
@@ -44,6 +36,14 @@ export const metadata: Metadata = {
   referrer: 'origin',
   icons: {
     icon: '/favicon.ico'
+  },
+  metadataBase: new URL('https://shadesigner.com'),
+  openGraph: {
+    title: 'Shadesigner - A Shadcn Palette Generator & Theme Designer',
+    description:
+      'Generate beautiful color palettes for your Shadcn projects. Edit your existing themes. 100% WCAG compliant theme generator.',
+    url: 'https://shadesigner.vercel.app',
+    siteName: 'Shadesigner - A Shadcn Palette Generator & Theme Designer'
   }
 }
 
@@ -54,8 +54,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased md:h-screen max-h-dvh w-full transition-colors duration-500`}>
+      <body className={`${inter.className} antialiased md:h-screen max-h-dvh w-full transition-colors duration-500`}>
         <ProviderProvider>{children}</ProviderProvider>
       </body>
     </html>

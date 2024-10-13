@@ -6,6 +6,9 @@ import WelcomeCard from '@/components/welcome-card'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { CssOutputDialog } from './customizer/output'
+import { ThemeToggle } from './customizer/theme-toggle'
+import { Footer } from './footer'
 import { Button } from './ui/button'
 
 export const ThemeDesigner = () => {
@@ -16,19 +19,45 @@ export const ThemeDesigner = () => {
     setHasLoaded(true)
   }, [])
 
+  const fadeAnimation = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition: { duration: 0.3 }
+  }
+
   return (
     <div className='relative h-full text-xs pt-4 pr-8 overflow-x-hidden'>
-      {!isInterfaceVisible && (
-        <Button
-          variant='outline'
-          onClick={() => setIsInterfaceVisible(true)}
-          className={`fixed top-4 left-4 z-10 transition-transform ease-in-out duration-500 ${
-            isInterfaceVisible ? 'hidden' : 'flex'
-          }`}>
-          <ChevronRight />
-          Show Theme Designer
-        </Button>
-      )}
+      <AnimatePresence>
+        {!isInterfaceVisible && (
+          <>
+            <motion.div
+              key='show-designer-button'
+              {...fadeAnimation}
+              className='fixed top-4 left-4 z-10'>
+              <Button
+                variant='outline'
+                onClick={() => setIsInterfaceVisible(true)}
+                className='transition-transform ease-in-out duration-500 flex'>
+                <ChevronRight />
+                Show Theme Designer
+              </Button>
+            </motion.div>
+            <motion.div
+              key='theme-toggle'
+              {...fadeAnimation}
+              className='fixed top-4 right-4 z-10'>
+              <ThemeToggle />
+            </motion.div>
+            <motion.div
+              key='css-output'
+              {...fadeAnimation}
+              className='fixed bottom-4 right-4 z-10'>
+              <CssOutputDialog />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       <div className='flex flex-col lg:flex-row items-center lg:items-start justify-center'>
         <AnimatePresence>
@@ -56,6 +85,7 @@ export const ThemeDesigner = () => {
           </motion.div>
         </AnimatePresence>
       </div>
+      <Footer />
     </div>
   )
 }
