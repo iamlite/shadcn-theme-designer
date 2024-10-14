@@ -1,6 +1,16 @@
 import { ImageResponse } from 'next/og'
 
-export async function GET() {
+export const runtime = 'edge'
+
+export const alt = 'Design Beautiful Color Palettes for Shadcn UI'
+export const size = {
+  width: 1200,
+  height: 630
+}
+
+export const contentType = 'image/png'
+
+export default async function Image() {
   return new ImageResponse(
     (
       <div
@@ -22,12 +32,11 @@ export async function GET() {
             display: 'flex',
             alignItems: 'center'
           }}>
-          <span
-            style={{
-              width: 24,
-              height: 24,
-              background: 'black'
-            }}
+          <img
+            src='https://shadesigner.com/favicon-32x32.png'
+            width={24}
+            height={24}
+            alt='Favicon'
           />
           <span
             style={{
