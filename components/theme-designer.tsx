@@ -8,7 +8,6 @@ import { ChevronRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { CssOutputDialog } from './customizer/output'
 import { ThemeToggle } from './customizer/theme-toggle'
-import { Footer } from './footer'
 import { Button } from './ui/button'
 
 export const ThemeDesigner = () => {
@@ -27,7 +26,7 @@ export const ThemeDesigner = () => {
   }
 
   return (
-    <div className='relative h-full text-xs pt-4 pr-8 overflow-x-hidden'>
+    <div className='relative text-xs pt-4 md:pr-8 w-full overflow-x-hidden'>
       <AnimatePresence>
         {!isInterfaceVisible && (
           <>
@@ -36,11 +35,12 @@ export const ThemeDesigner = () => {
               {...fadeAnimation}
               className='fixed top-4 left-4 z-10'>
               <Button
+                size='xs'
                 variant='outline'
                 onClick={() => setIsInterfaceVisible(true)}
                 className='transition-transform ease-in-out duration-500 flex'>
                 <ChevronRight />
-                Show Theme Designer
+                Show Designer
               </Button>
             </motion.div>
             <motion.div
@@ -59,7 +59,7 @@ export const ThemeDesigner = () => {
         )}
       </AnimatePresence>
 
-      <div className='flex flex-col lg:flex-row items-center lg:items-start justify-center'>
+      <div className='flex flex-col lg:flex-row items-center lg:items-start justify-center w-full'>
         <AnimatePresence>
           {isInterfaceVisible && (
             <motion.div
@@ -78,14 +78,14 @@ export const ThemeDesigner = () => {
           <motion.div
             key='right-panel'
             layout
-            className={`flex-grow pl-4 pt-8 ${isInterfaceVisible ? '' : 'max-w-7xl mx-auto'}`}
-            animate={{ width: isInterfaceVisible ? '70%' : '100%' }}
+            className={`flex-grow md:pl-4 pt-8 ${
+              isInterfaceVisible ? 'w-[90%] lg:w-[70%]' : 'md:max-w-7xl md:mx-auto w-full'
+            }`}
             transition={{ duration: 0.3, ease: 'easeInOut', type: 'spring', stiffness: 300, damping: 15 }}>
             <Showcase />
           </motion.div>
         </AnimatePresence>
       </div>
-      <Footer />
     </div>
   )
 }

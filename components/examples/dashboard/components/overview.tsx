@@ -51,6 +51,7 @@ export function Overview() {
 
   return (
     <ResponsiveContainer
+      className='bg-background shadow-md rounded-md'
       width='100%'
       height={350}>
       <ChartContainer config={chartConfig}>

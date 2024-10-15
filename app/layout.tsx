@@ -3,7 +3,11 @@ import { Inter } from 'next/font/google'
 import ProviderProvider from '../contexts/provider-provider'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap'
+})
+
 export const metadata: Metadata = {
   title: 'Shadesigner - A Shadcn Palette Generator & Theme Designer',
   description:
@@ -34,16 +38,20 @@ export const metadata: Metadata = {
     'typescript'
   ],
   referrer: 'origin',
-  icons: {
-    icon: '/favicon.ico'
-  },
   metadataBase: new URL('https://shadesigner.com'),
   openGraph: {
     title: 'Shadesigner - A Shadcn Palette Generator & Theme Designer',
     description:
       'Generate beautiful color palettes for your Shadcn projects. Edit your existing themes. 100% WCAG compliant theme generator.',
     url: 'https://shadesigner.vercel.app',
-    siteName: 'Shadesigner - A Shadcn Palette Generator & Theme Designer'
+    siteName: 'Shadesigner - A Shadcn Palette Generator & Theme Designer',
+    images: [
+      {
+        url: 'https://shadesigner.com/opengraph-image',
+        width: 1200,
+        height: 630
+      }
+    ]
   }
 }
 

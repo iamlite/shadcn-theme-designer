@@ -1,83 +1,83 @@
+import { colorPairs, OgAlt, OGSize as size } from '@/lib/vars'
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-export const alt = 'Design Beautiful Color Palettes for Shadcn UI'
-export const size = {
-  width: 1200,
-  height: 630
-}
+export const alt = OgAlt
 
 export const contentType = 'image/png'
 
-export default function Image() {
+export default async function Image() {
+  const [color1, color2] = colorPairs[Math.floor(Math.random() * colorPairs.length)]
+
   return new ImageResponse(
     (
       <div
         style={{
-          display: 'flex',
-          height: '100%',
+          background: `linear-gradient(to right, ${color1}, ${color2})`,
           width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          letterSpacing: '-.02em',
-          fontWeight: 700,
-          background: 'white'
+          borderRadius: '24px',
+          overflow: 'hidden'
         }}>
         <div
           style={{
-            left: 42,
-            top: 42,
-            position: 'absolute',
             display: 'flex',
-            alignItems: 'center'
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(255, 255, 255, 0.2)',
+            borderRadius: '24px',
+            padding: '16px',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
           }}>
           <img
             src='https://shadesigner.com/favicon-32x32.png'
-            width={24}
-            height={24}
-            alt='Favicon'
+            width={64}
+            height={64}
+            alt='Shadesigner Logo'
+            style={{
+              borderRadius: '12px'
+            }}
           />
-          <span
-            style={{
-              marginLeft: 8,
-              fontSize: 24
-            }}>
-            shadesigner.com
-          </span>
         </div>
-        <div
+        <h1
           style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            padding: '20px 50px',
-            margin: '0 42px',
-            fontSize: 40,
-            width: 'auto',
-            maxWidth: 550,
-            textAlign: 'center',
-            backgroundColor: 'black',
+            fontSize: '64px',
+            fontWeight: 'bold',
             color: 'white',
-            lineHeight: 1.4,
-            borderRadius: '10px'
+            textAlign: 'center',
+            marginTop: '40px',
+            maxWidth: '900px',
+            textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
           }}>
-          <div
-            tw='font-bold'
-            style={{
-              backgroundImage: 'linear-gradient(90deg, rgb(0, 124, 240), rgb(0, 223, 216))',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              color: 'transparent'
-            }}>
-            Design Beautiful Color Palettes for Shadcn UI
-          </div>
-        </div>
+          Design Beautiful Color Palettes for Shadcn UI
+        </h1>
+        <p
+          style={{
+            fontSize: '32px',
+            color: 'rgba(255, 255, 255, 0.9)',
+            textAlign: 'center',
+            marginTop: '20px',
+            textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+          }}>
+          Create stunning, harmonious color schemes with ease
+        </p>
       </div>
     ),
     {
-      width: 1200,
-      height: 630
+      ...size,
+      fonts: [
+        {
+          name: 'Inter',
+          data: await fetch(new URL('./fonts/Inter-Bold.ttf', import.meta.url)).then((res) => res.arrayBuffer()),
+          weight: 700,
+          style: 'normal'
+        }
+      ]
     }
   )
 }

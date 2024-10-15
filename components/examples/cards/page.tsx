@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react'
 import { DemoCookieSettings } from './components/cookie-settings'
 import { DemoCreateAccount } from './components/create-account'
 import { DemoDatePicker } from './components/date-picker'
-
 import { DemoNotifications } from './components/notifications'
 import { DemoPaymentMethod } from './components/payment-method'
 import UserProfileCard from './components/profile-card'
@@ -54,7 +53,7 @@ export default function CardsPage() {
   if (!isLoaded) {
     return (
       <div className='h-full w-full'>
-        <div className='items-start justify-center gap-6 rounded-lg p-8 md:grid lg:grid-cols-2 xl:grid-cols-3'>
+        <div className='items-start justify-center gap-6 rounded-lg md:p-8 md:grid lg:grid-cols-2 xl:grid-cols-3'>
           <div className='col-span-2 grid items-start gap-6 lg:col-span-1'>
             <SkeletonDemo />
           </div>
@@ -80,11 +79,11 @@ export default function CardsPage() {
   }
 
   return (
-    <div className='h-full w-full'>
+    <div className='h-full w-full overflow-y-hidden'>
       <AnimatePresence>
         {shouldAnimate && (
           <motion.div
-            className='items-start justify-center gap-6 rounded-lg md:grid lg:grid-cols-2 xl:grid-cols-3'
+            className='items-start justify-center gap-6 rounded-lg md:grid lg:grid-cols-2 xl:grid-cols-3 space-y-6 md:space-y-0'
             variants={containerVariants}
             initial='hidden'
             animate='visible'>

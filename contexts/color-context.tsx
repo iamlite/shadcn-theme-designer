@@ -1,4 +1,4 @@
-import { invertColor, parseCssInput, updateCssVariable, updateCssVariables } from '@/lib/color-utils'
+import { parseCssInput, updateCssVariable, updateCssVariables } from '@/lib/color-utils'
 import { generateColorPalette } from '@/lib/palette-generator'
 import { ThemePreset, themePresets } from '@/lib/presets'
 import { Color } from 'color-core'
@@ -13,8 +13,6 @@ type ColorContextType = {
   handleColorChange: (variable: string, hslValue: string, mode: 'light' | 'dark') => void
   resetColors: () => void
   handleParseCssInput: (input: string) => void
-  handleInvertColor: (variable: string, mode: 'light' | 'dark') => void
-  handleFlipColor: (variable: string, from: 'light' | 'dark') => void
   applyPreset: (preset: ThemePreset) => void
   generateRandomPalette: () => void
   presets: ThemePreset[]
@@ -133,23 +131,6 @@ export const ColorProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     updateCssVariables(newDarkColors, 'dark')
   }
 
-  const handleInvertColor = (variable: string, mode: 'light' | 'dark') => {
-    const colors = mode === 'light' ? lightColors : darkColors
-    const invertedColor = invertColor(colors[variable])
-    updateColorAndCssVariable(variable, invertedColor, mode)
-  }
-
-  const handleFlipColor = (variable: string, from: 'light' | 'dark') => {
-    const source = from === 'light' ? lightColors : darkColors
-    const target = from === 'light' ? 'dark' : 'light'
-    const setColors = target === 'light' ? setLightColors : setDarkColors
-    setColors((prev) => ({ ...prev, [variable]: source[variable] }))
-
-    if (theme === target) {
-      updateCssVariable(variable, source[variable])
-    }
-  }
-
   const applyPreset = (preset: ThemePreset) => {
     setLightColors(preset.lightColors)
     setDarkColors(preset.darkColors)
@@ -212,8 +193,6 @@ export const ColorProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     handleColorChange,
     resetColors,
     handleParseCssInput,
-    handleInvertColor,
-    handleFlipColor,
     applyPreset,
     generateRandomPalette: handleGenerateRandomPalette,
     presets: themePresets,

@@ -5,6 +5,7 @@ import { Download } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '../ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
+
 export function CssOutputDialog() {
   const [copied, setCopied] = useState(false)
   const { lightColors, darkColors, radius } = useColorContext()
@@ -44,6 +45,24 @@ ${darkVars}
     })
   }
 
+  // const generatePresetOutput = (): ThemePreset => {
+  //   return {
+  //     name: 'Custom Theme',
+  //     lightColors: Object.fromEntries(colorVariables.map((v) => [v, lightColors[v] || themePresets[0].lightColors[v]])),
+  //     darkColors: Object.fromEntries(colorVariables.map((v) => [v, darkColors[v] || themePresets[0].darkColors[v]])),
+  //     radius: radius
+  //   }
+  // }
+
+  // const copyPresetToClipboard = () => {
+  //   const preset = generatePresetOutput()
+  //   const presetString = JSON.stringify(preset, null, 2)
+  //   navigator.clipboard.writeText(presetString).then(() => {
+  //     setCopied(true)
+  //     setTimeout(() => setCopied(false), 2000)
+  //   })
+  // }
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -63,7 +82,14 @@ ${darkVars}
             <code>{cssOutput}</code>
           </pre>
         </div>
-        <Button onClick={copyToClipboard}>{copied ? 'Copied!' : 'Copy to Clipboard'}</Button>
+        <div className='flex space-x-2'>
+          <Button
+            className='w-full'
+            onClick={copyToClipboard}>
+            {copied ? 'Copied!' : 'Copy CSS to Clipboard'}
+          </Button>
+          {/* <Button onClick={copyPresetToClipboard}>Copy Preset to Clipboard</Button> */}
+        </div>
       </DialogContent>
     </Dialog>
   )

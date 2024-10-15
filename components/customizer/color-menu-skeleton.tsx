@@ -27,15 +27,11 @@ export default function ColorMenuSkeleton() {
               </TableCell>
               <TableCell className='py-0.5'>
                 <div className='flex items-center space-x-1'>
-                  <Skeleton className='h-4 w-4 rounded-md' />
-                  <Skeleton className='h-4 w-4 rounded-md' />
                   <Skeleton className='h-5 w-12 rounded-md' />
                 </div>
               </TableCell>
               <TableCell className='py-0.5'>
                 <div className='flex items-center space-x-1'>
-                  <Skeleton className='h-4 w-4 rounded-md' />
-                  <Skeleton className='h-4 w-4 rounded-md' />
                   <Skeleton className='h-5 w-12 rounded-md' />
                 </div>
               </TableCell>
