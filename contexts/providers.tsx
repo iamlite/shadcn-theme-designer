@@ -4,7 +4,7 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import { ColorProvider } from '@/contexts/color-context'
 import { ThemeProvider } from '@/contexts/theme-provider'
 
-export default function ProviderProvider({ children }: { children: React.ReactNode }) {
+export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider
       disableTransitionOnChange={false}
