@@ -52,6 +52,13 @@ export const metadata: Metadata = {
         height: 630
       }
     ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Shadesigner - A Shadcn Palette Generator & Theme Designer',
+    description:
+      'Generate beautiful color palettes for your Shadcn projects. Edit your existing themes. 100% WCAG compliant theme generator.',
+    images: ['https://shadesigner.com/twitter-image']
   }
 }
 
