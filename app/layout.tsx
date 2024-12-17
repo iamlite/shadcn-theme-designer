@@ -1,5 +1,5 @@
 import Providers from '@/contexts/providers'
-import type { Metadata } from 'next'
+import Metadata from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: 'Shadesigner - A Shadcn Palette Generator & Theme Designer',
   description:
     'Generate beautiful color palettes for your Shadcn projects. Edit your existing themes. 100% WCAG compliant theme generator.',
-  applicationName: 'Shadesigner - A Shadcn Palette Generator & Theme Designer',
+  applicationName: 'Shadesigner - A Shadcn Theme Generator & Palette Designer',
   authors: [
     {
       name: 'Tariel Davidashvili',
@@ -68,7 +68,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
+    <html
+      suppressHydrationWarning
+      lang='en'>
       <body className={`${inter.className} antialiased md:h-screen max-h-dvh w-full transition-colors duration-500`}>
         <Providers>{children}</Providers>
       </body>
