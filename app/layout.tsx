@@ -8,7 +8,7 @@ const inter = Inter({
   display: 'swap'
 })
 
-export const metadata: Metadata = {
+export const metadata: typeof Metadata = {
   title: 'Shadesigner - A Shadcn Palette Generator & Theme Designer',
   description:
     'Generate beautiful color palettes for your Shadcn projects. Edit your existing themes. 100% WCAG compliant theme generator.',
