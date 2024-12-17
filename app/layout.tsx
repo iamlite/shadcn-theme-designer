@@ -1,5 +1,6 @@
 import Providers from '@/contexts/providers'
-import Metadata from 'next'
+import { Analytics } from '@vercel/analytics/react'
+import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
@@ -8,7 +9,7 @@ const inter = Inter({
   display: 'swap'
 })
 
-export const metadata: typeof Metadata = {
+export const metadata: Metadata = {
   title: 'Shadesigner - A Shadcn Palette Generator & Theme Designer',
   description:
     'Generate beautiful color palettes for your Shadcn projects. Edit your existing themes. 100% WCAG compliant theme generator.',
@@ -72,7 +73,10 @@ export default function RootLayout({
       suppressHydrationWarning
       lang='en'>
       <body className={`${inter.className} antialiased md:h-screen max-h-dvh w-full transition-colors duration-500`}>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Analytics />
+        </Providers>
       </body>
     </html>
   )
